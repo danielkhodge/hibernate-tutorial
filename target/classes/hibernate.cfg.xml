@@ -7,7 +7,7 @@
 		<!-- JDBC Database connection settings -->
 
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost/hb_student_tracker?useUnicode=true;useJDBCCompliantTimezoneShift=true;useLegacyDatetimeCode=false;serverTimezone=UTC</property>
+		<property name="connection.url">jdbc:mysql://localhost/hb-01-one-to-one-uni?useUnicode=true;useJDBCCompliantTimezoneShift=true;useLegacyDatetimeCode=false;serverTimezone=UTC</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">hbstudent</property>
 
