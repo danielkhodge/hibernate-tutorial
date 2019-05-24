@@ -8,10 +8,10 @@ import org.hibernate.cfg.Configuration;
 import com.hodge.daniel.hibernate.demo.entity.Course;
 import com.hodge.daniel.hibernate.demo.entity.Instructor;
 import com.hodge.daniel.hibernate.demo.entity.InstructorDetail;
+import com.hodge.daniel.hibernate.demo.entity.Review;
 import com.hodge.daniel.hibernate.demo.entity.Student;
 
-
-public class CreateInstructorDemo {
+public class GetCoursesForMaryDemo {
 
 	public static void main(String[] args) {
 		
@@ -20,25 +20,21 @@ public class CreateInstructorDemo {
 				.addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class)
 				.addAnnotatedClass(Course.class)
+				.addAnnotatedClass(Review.class)
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 		
 		Session session = factory.getCurrentSession();
 		
 		try {	
 			
-			Instructor tempInstructor = 
-					new Instructor("Susan", "Public", "susan@luv2code.com");
-			
-			InstructorDetail tempInstructorDetail = 
-					new InstructorDetail(
-							"http://www.youtube.com", 
-							"Gameing");
-			tempInstructor.setInstructorDetail(tempInstructorDetail);
-			
-			System.out.println("Saving instructor: " + tempInstructor);
 			session.beginTransaction();
-						
-			session.save(tempInstructor);
+			
+			int studentId = 2;
+			Student tempStudent = session.get(Student.class,  studentId);
+			
+			System.out.println("\nLoaded student: " + tempStudent);
+			System.out.println("Courses: " + tempStudent.getCourses());
 			
 			session.getTransaction().commit();
 			

@@ -9,8 +9,9 @@ import com.hodge.daniel.hibernate.demo.entity.Course;
 import com.hodge.daniel.hibernate.demo.entity.Instructor;
 import com.hodge.daniel.hibernate.demo.entity.InstructorDetail;
 import com.hodge.daniel.hibernate.demo.entity.Review;
+import com.hodge.daniel.hibernate.demo.entity.Student;
 
-public class GetCoursesAndReviewsDemo {
+public class AddCoursesForMaryDemo {
 
 	public static void main(String[] args) {
 		
@@ -20,6 +21,7 @@ public class GetCoursesAndReviewsDemo {
 				.addAnnotatedClass(InstructorDetail.class)
 				.addAnnotatedClass(Course.class)
 				.addAnnotatedClass(Review.class)
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 		
 		Session session = factory.getCurrentSession();
@@ -28,12 +30,25 @@ public class GetCoursesAndReviewsDemo {
 			
 			session.beginTransaction();
 			
-			int theId = 10;
-			Course tempCourse = session.get(Course.class, theId);
+			int studentId = 3;
+			Student tempStudent = session.get(Student.class,  studentId);
 			
-			System.out.println(tempCourse);
+			System.out.println("\nLoaded student: " + tempStudent);
+			System.out.println("Courses: " + tempStudent.getCourses());
 			
-			System.out.println(tempCourse.getReviews());
+			Course tempCourse1 =new Course("Rubik's Cube - How To Speed Cube");
+			Course tempCourse2 =new Course("Atari 2600 - Game Development");
+			Course tempCourse3 =new Course("YoYo Flipping - Simple YoYo Tricks");
+			
+			tempCourse1.addStudent(tempStudent);
+			tempCourse2.addStudent(tempStudent);
+			tempCourse3.addStudent(tempStudent);
+			
+			System.out.println("\nSaving the course ...");
+			
+			session.save(tempCourse1);
+			session.save(tempCourse2);
+			session.save(tempCourse3);
 			
 			session.getTransaction().commit();
 			

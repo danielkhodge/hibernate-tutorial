@@ -8,8 +8,10 @@ import org.hibernate.cfg.Configuration;
 import com.hodge.daniel.hibernate.demo.entity.Course;
 import com.hodge.daniel.hibernate.demo.entity.Instructor;
 import com.hodge.daniel.hibernate.demo.entity.InstructorDetail;
+import com.hodge.daniel.hibernate.demo.entity.Review;
+import com.hodge.daniel.hibernate.demo.entity.Student;
 
-public class GetInstructorCoursesDemo {
+public class DeletePackmanCourseDemo {
 
 	public static void main(String[] args) {
 		
@@ -18,6 +20,8 @@ public class GetInstructorCoursesDemo {
 				.addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class)
 				.addAnnotatedClass(Course.class)
+				.addAnnotatedClass(Review.class)
+				.addAnnotatedClass(Student.class)
 				.buildSessionFactory();
 		
 		Session session = factory.getCurrentSession();
@@ -26,12 +30,12 @@ public class GetInstructorCoursesDemo {
 			
 			session.beginTransaction();
 			
-			int theId = 1;
-			Instructor tempInstructor = session.get(Instructor.class, theId);
+			int courseId = 10;
+			Course tempCourse = session.get(Course.class,  courseId);
 			
-			System.out.println("Instructor: " + tempInstructor);
+			System.out.println("Deleting course: " + tempCourse);
 			
-			System.out.println("Courses: " + tempInstructor.getCourses());
+			session.delete(tempCourse);
 			
 			session.getTransaction().commit();
 			
